@@ -1,0 +1,111 @@
+.home-preview {
+  width: 100%;
+  max-width: 1280px;
+  margin: 96px auto 0;
+}
+
+.home-preview-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-gutter);
+}
+
+@media (min-width: 768px) {
+  .home-preview-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+.preview-featured {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--outline-variant);
+  padding: var(--spacing-gutter);
+  background: var(--surface-container-lowest);
+  transition: border-color var(--transition-base);
+  min-height: 320px;
+}
+
+@media (min-width: 768px) {
+  .preview-featured {
+    grid-column: span 8;
+  }
+}
+
+.preview-featured:hover {
+  border-color: var(--primary-container);
+}
+
+.preview-services {
+  border: 1px solid var(--outline-variant);
+  padding: var(--spacing-gutter);
+  background: var(--terminal-dim);
+  transition: border-color var(--transition-base);
+}
+
+@media (min-width: 768px) {
+  .preview-services {
+    grid-column: span 4;
+  }
+}
+
+.preview-services:hover {
+  border-color: var(--primary-container);
+}
+
+.preview-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.preview-wireframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 1px dashed var(--outline-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-featured-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 32px;
+  gap: 16px;
+}
+
+.preview-desc {
+  max-width: 480px;
+  color: var(--on-surface-variant);
+  font-size: 16px;
+}
+
+.services-list {
+  list-style: none;
+}
+
+.services-list li {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: var(--on-surface);
+  padding: 16px 0;
+}
+
+.services-list li:first-child {
+  padding-top: 0;
+}
+
+.services-item-border {
+  border-top: 1px solid var(--outline-variant);
+}
+
+.service-num {
+  color: var(--primary-container);
+  font-weight: 700;
+  margin-right: 12px;
+}

@@ -1,0 +1,133 @@
+.contact-page {
+  width: 100%;
+}
+
+.contact-header {
+  margin-bottom: 64px;
+}
+
+.contact-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.contact-tag .material-symbols-outlined {
+  font-size: 14px;
+}
+
+.contact-title {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .contact-title {
+    font-size: 64px;
+  }
+}
+
+.contact-title-bar {
+  width: 96px;
+  height: 4px;
+  background: var(--primary-container);
+  margin-top: 16px;
+}
+
+.contact-prompt {
+  margin-top: 16px;
+  font-size: 18px;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-gutter);
+}
+
+@media (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1.5fr;
+  }
+}
+
+.contact-info-panel {
+  border: 1px solid var(--primary-fixed);
+  padding: 32px;
+  background: var(--terminal-dim);
+}
+
+.contact-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--primary-fixed);
+  padding-bottom: 8px;
+  margin-bottom: 24px;
+}
+
+.contact-info-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contact-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--on-surface-variant);
+}
+
+.contact-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 16px;
+  color: var(--on-surface);
+}
+
+.contact-form {
+  border: 1px solid var(--outline-variant);
+  padding: 32px;
+  background: var(--surface-container-lowest);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--background);
+  border: 1px solid var(--outline-variant);
+  color: var(--on-surface);
+  font-family: var(--font-body);
+  font-size: 16px;
+  transition: border-color var(--transition-base);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-container);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-status {
+  padding: 12px;
+  border: 1px solid var(--primary-container);
+  color: var(--primary-container);
+  font-size: 14px;
+}

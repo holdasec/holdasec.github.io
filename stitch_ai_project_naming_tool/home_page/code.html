@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>R | Designer &amp; Developer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#795f01",
+                    "inverse-on-surface": "#29332a",
+                    "surface-container-high": "#222c24",
+                    "surface-container-low": "#141e16",
+                    "surface": "#0c160e",
+                    "secondary-fixed": "#b2f1c1",
+                    "inverse-primary": "#006d37",
+                    "surface-container-highest": "#2d372e",
+                    "primary": "#f1ffef",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "on-secondary-fixed": "#00210e",
+                    "on-surface": "#dae6d8",
+                    "secondary-container": "#175330",
+                    "secondary": "#97d5a6",
+                    "primary-fixed": "#60ff99",
+                    "on-secondary-fixed-variant": "#14512e",
+                    "outline-variant": "#3b4b3d",
+                    "tertiary-container": "#ffdb79",
+                    "outline": "#849585",
+                    "primary-container": "#00ff88",
+                    "on-tertiary-fixed": "#241a00",
+                    "secondary-fixed-dim": "#97d5a6",
+                    "tertiary-fixed-dim": "#e5c364",
+                    "on-primary-fixed": "#00210c",
+                    "tertiary-fixed": "#ffe08d",
+                    "on-primary-container": "#007139",
+                    "tertiary": "#fffaf7",
+                    "on-primary": "#003919",
+                    "surface-container": "#18221a",
+                    "scanline-overlay": "rgba(0, 255, 136, 0.05)",
+                    "surface-dim": "#0c160e",
+                    "inverse-surface": "#dae6d8",
+                    "terminal-dim": "#002211",
+                    "on-surface-variant": "#b9cbb9",
+                    "primary-fixed-dim": "#00e479",
+                    "on-error": "#690005",
+                    "on-secondary": "#00391b",
+                    "background-pure": "#000000",
+                    "surface-bright": "#323c32",
+                    "on-primary-fixed-variant": "#005228",
+                    "on-secondary-container": "#89c699",
+                    "surface-tint": "#00e479",
+                    "on-error-container": "#ffdad6",
+                    "surface-variant": "#2d372e",
+                    "error": "#ffb4ab",
+                    "surface-container-lowest": "#071009",
+                    "error-container": "#93000a",
+                    "on-tertiary": "#3d2f00",
+                    "background": "#0c160e",
+                    "on-background": "#dae6d8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "24px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "max-width": "1280px"
+            },
+            "fontFamily": {
+                    "body-lg": ["JetBrains Mono"],
+                    "headline-lg": ["Space Mono"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-md": ["Space Mono"],
+                    "body-md": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Space Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0c160e;
+            color: #dae6d8;
+            overflow-x: hidden;
+        }
+
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 255, 136, 0.05) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 4px, 3px 100%;
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .glow-text {
+            text-shadow: 0 0 10px rgba(0, 255, 136, 0.6);
+        }
+
+        .terminal-grid {
+            background-image: radial-gradient(circle, #3b4b3d 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        /* Custom Hover effect for Brutalist Buttons */
+        .brutalist-button:hover {
+            box-shadow: 4px 4px 0px 0px #00ff88;
+            transform: translate(-2px, -2px);
+        }
+    </style>
+</head>
+<body class="font-body-md antialiased terminal-grid min-h-screen flex flex-col">
+<div class="scanline"></div>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-primary dark:border-primary-fixed shadow-[0_0_10px_rgba(0,255,136,0.2)]">
+<nav class="flex justify-between items-center px-margin-desktop py-4 max-w-full mx-auto">
+<div class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed">R</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="font-body-lg text-body-lg uppercase tracking-widest text-primary dark:text-primary-fixed before:content-['['] after:content-[']']" href="#">Home</a>
+<a class="font-body-lg text-body-lg uppercase tracking-widest text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">About</a>
+<a class="font-body-lg text-body-lg uppercase tracking-widest text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Works</a>
+<a class="font-body-lg text-body-lg uppercase tracking-widest text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Contact</a>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+</nav>
+</header>
+<!-- Hero Section -->
+<main class="flex-grow flex flex-col items-center justify-center pt-24 pb-gutter px-margin-mobile md:px-margin-desktop">
+<section class="relative w-full max-w-5xl flex flex-col items-center text-center space-y-gutter border border-outline-variant p-12 md:p-24 bg-terminal-dim">
+<!-- Decorative Corners -->
+<div class="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-primary-container"></div>
+<div class="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-primary-container"></div>
+<div class="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-primary-container"></div>
+<div class="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-primary-container"></div>
+<div class="inline-block border border-outline px-4 py-1 mb-4">
+<span class="text-label-sm font-label-sm uppercase text-primary-container tracking-widest">System Status: Operational</span>
+</div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary glow-text uppercase">
+                HI HERE IS RIA
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+<span class="text-primary-container">$</span> Designer / Developer
+                <span class="cursor-blink border-l-2 border-primary-container ml-1 h-6"></span>
+</p>
+<div class="pt-8">
+<a class="inline-flex items-center px-8 py-4 border border-primary-container text-primary font-body-lg text-body-lg uppercase transition-all duration-200 hover:bg-primary-container hover:text-on-primary-container group" href="#contact">
+<span class="mr-2">&gt;</span> CONTACT ME
+                </a>
+</div>
+<!-- Metadata Box -->
+<div class="mt-12 w-full grid grid-cols-1 md:grid-cols-3 gap-gutter text-left border-t border-outline-variant pt-8">
+<div class="space-y-2">
+<span class="text-label-sm font-label-sm text-outline uppercase block">Location</span>
+<span class="text-body-md font-body-md text-on-surface">Earth // Remote</span>
+</div>
+<div class="space-y-2">
+<span class="text-label-sm font-label-sm text-outline uppercase block">Current Stack</span>
+<span class="text-body-md font-body-md text-on-surface">React / Tailwind / Node</span>
+</div>
+<div class="space-y-2">
+<span class="text-label-sm font-label-sm text-outline uppercase block">Year</span>
+<span class="text-body-md font-body-md text-on-surface">2024.v1</span>
+</div>
+</div>
+</section>
+<!-- Bento Layout Preview (Wireframe Style) -->
+<section class="w-full max-w-7xl mt-24 grid grid-cols-1 md:grid-cols-12 gap-gutter px-margin-mobile md:px-0">
+<div class="md:col-span-8 border border-outline-variant p-gutter flex flex-col justify-between hover:border-primary-container transition-colors bg-surface-container-lowest">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">[ FEATURED_WORK ]</h3>
+<div class="w-full aspect-video border border-dashed border-outline-variant flex items-center justify-center text-outline">
+                        [ PROJECT_WIREFRAME_01 ]
+                    </div>
+</div>
+<div class="flex justify-between items-end mt-8">
+<p class="text-body-md font-body-md max-w-md text-on-surface-variant">High-fidelity terminal interface design for decentralized data visualizers.</p>
+<span class="material-symbols-outlined text-primary-container">arrow_forward</span>
+</div>
+</div>
+<div class="md:col-span-4 border border-outline-variant p-gutter bg-terminal-dim hover:border-primary-container transition-colors">
+<h3 class="font-headline-md text-headline-md text-primary mb-6">[ SERVICES ]</h3>
+<ul class="space-y-4 font-body-md text-on-surface">
+<li class="flex items-center"><span class="text-primary-container mr-3 font-bold">01</span> UI/UX Architecture</li>
+<li class="flex items-center border-t border-outline-variant pt-4"><span class="text-primary-container mr-3 font-bold">02</span> Fullstack Engineering</li>
+<li class="flex items-center border-t border-outline-variant pt-4"><span class="text-primary-container mr-3 font-bold">03</span> Technical Strategy</li>
+<li class="flex items-center border-t border-outline-variant pt-4"><span class="text-primary-container mr-3 font-bold">04</span> Brand Identity</li>
+</ul>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-primary dark:border-primary-fixed mt-auto bg-background dark:bg-background">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter w-full">
+<div class="font-headline-md text-headline-md text-primary mb-4 md:mb-0">R</div>
+<div class="text-center md:text-left mb-4 md:mb-0">
+<p class="font-label-sm text-label-sm uppercase text-on-surface-variant">
+                    © 2024 RIA_SYSTEMS. ALL_RIGHTS_RESERVED.
+                </p>
+</div>
+<div class="flex space-x-6">
+<a class="font-label-sm text-label-sm uppercase text-on-surface-variant hover:text-primary-container transition-all hover:translate-x-1 duration-150" href="#">Documentation</a>
+<a class="font-label-sm text-label-sm uppercase text-on-surface-variant hover:text-primary-container transition-all hover:translate-x-1 duration-150" href="#">Source</a>
+<a class="font-label-sm text-label-sm uppercase text-on-surface-variant hover:text-primary-container transition-all hover:translate-x-1 duration-150" href="#">Terminal</a>
+</div>
+</div>
+</footer>
+<script>
+        // Micro-interaction for title glitch effect
+        const title = document.querySelector('h1');
+        title.addEventListener('mouseover', () => {
+            const originalText = "HI HERE IS RIA";
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()";
+            let iterations = 0;
+            
+            const interval = setInterval(() => {
+                title.innerText = originalText.split("")
+                    .map((char, index) => {
+                        if(index < iterations) return originalText[index];
+                        return chars[Math.floor(Math.random() * chars.length)];
+                    })
+                    .join("");
+                
+                if(iterations >= originalText.length) clearInterval(interval);
+                iterations += 1/3;
+            }, 30);
+        });
+    </script>
+</body></html>

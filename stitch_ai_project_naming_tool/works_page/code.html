@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#795f01",
+                    "inverse-on-surface": "#29332a",
+                    "surface-container-high": "#222c24",
+                    "surface-container-low": "#141e16",
+                    "surface": "#0c160e",
+                    "secondary-fixed": "#b2f1c1",
+                    "inverse-primary": "#006d37",
+                    "surface-container-highest": "#2d372e",
+                    "primary": "#f1ffef",
+                    "on-tertiary-fixed-variant": "#584400",
+                    "on-secondary-fixed": "#00210e",
+                    "on-surface": "#dae6d8",
+                    "secondary-container": "#175330",
+                    "secondary": "#97d5a6",
+                    "primary-fixed": "#60ff99",
+                    "on-secondary-fixed-variant": "#14512e",
+                    "outline-variant": "#3b4b3d",
+                    "tertiary-container": "#ffdb79",
+                    "outline": "#849585",
+                    "primary-container": "#00ff88",
+                    "on-tertiary-fixed": "#241a00",
+                    "secondary-fixed-dim": "#97d5a6",
+                    "tertiary-fixed-dim": "#e5c364",
+                    "on-primary-fixed": "#00210c",
+                    "tertiary-fixed": "#ffe08d",
+                    "on-primary-container": "#007139",
+                    "tertiary": "#fffaf7",
+                    "on-primary": "#003919",
+                    "surface-container": "#18221a",
+                    "scanline-overlay": "rgba(0, 255, 136, 0.05)",
+                    "surface-dim": "#0c160e",
+                    "inverse-surface": "#dae6d8",
+                    "terminal-dim": "#002211",
+                    "on-surface-variant": "#b9cbb9",
+                    "primary-fixed-dim": "#00e479",
+                    "on-error": "#690005",
+                    "on-secondary": "#00391b",
+                    "background-pure": "#000000",
+                    "surface-bright": "#323c32",
+                    "on-primary-fixed-variant": "#005228",
+                    "on-secondary-container": "#89c699",
+                    "surface-tint": "#00e479",
+                    "on-error-container": "#ffdad6",
+                    "surface-variant": "#2d372e",
+                    "error": "#ffb4ab",
+                    "surface-container-lowest": "#071009",
+                    "error-container": "#93000a",
+                    "on-tertiary": "#3d2f00",
+                    "background": "#0c160e",
+                    "on-background": "#dae6d8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "24px",
+                    "gutter": "24px",
+                    "margin-desktop": "64px",
+                    "unit": "8px",
+                    "max-width": "1280px"
+            },
+            "fontFamily": {
+                    "body-lg": ["JetBrains Mono"],
+                    "headline-lg": ["Space Mono"],
+                    "label-sm": ["JetBrains Mono"],
+                    "headline-md": ["Space Mono"],
+                    "body-md": ["JetBrains Mono"],
+                    "headline-lg-mobile": ["Space Mono"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg": ["64px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700"}],
+                    "headline-md": ["32px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["40px", {"lineHeight": "1.1", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #000000;
+            cursor: crosshair;
+        }
+        .scanline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 255, 136, 0) 0%,
+                rgba(0, 255, 136, 0.02) 50%,
+                rgba(0, 255, 136, 0) 100%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        .wireframe-pattern {
+            background-image: 
+                linear-gradient(to right, #175330 1px, transparent 1px),
+                linear-gradient(to bottom, #175330 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        .diagonal-stripes {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0, 255, 136, 0.1) 10px,
+                rgba(0, 255, 136, 0.1) 11px
+            );
+        }
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+        }
+        @keyframes flicker {
+            0% { opacity: 0.97; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col font-body-md overflow-x-hidden">
+<div class="scanline"></div>
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-primary dark:border-primary-fixed shadow-[0_0_10px_rgba(0,255,136,0.2)] flex justify-between items-center px-margin-desktop py-4 max-w-full mx-auto">
+<div class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed tracking-tighter">R</div>
+<div class="hidden md:flex gap-gutter font-body-lg text-body-lg uppercase tracking-widest">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Home</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">About</a>
+<a class="text-primary dark:text-primary-fixed before:content-['['] after:content-[']']" href="#">Works</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">Contact</a>
+</div>
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-grow pt-[120px] pb-margin-desktop px-margin-mobile md:px-margin-desktop max-w-max-width mx-auto w-full">
+<!-- Header Section -->
+<header class="mb-16 border-l-4 border-primary-container pl-6">
+<h1 class="font-headline-lg text-headline-lg md:text-headline-lg text-primary uppercase tracking-tighter crt-flicker">Works</h1>
+<div class="flex items-center gap-2 text-on-surface-variant mt-2 font-label-sm">
+<span class="animate-pulse">●</span>
+<span>SYSTEM_STATUS: ONLINE</span>
+<span class="mx-2">|</span>
+<span>CATALOG_VERSION: 2.0.4</span>
+</div>
+</header>
+<!-- Project Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<article class="group relative bg-terminal-dim border border-primary/30 hover:border-primary-container transition-all duration-300 p-4 flex flex-col gap-4">
+<div class="aspect-video w-full border border-primary/20 relative overflow-hidden bg-surface-container-lowest flex items-center justify-center diagonal-stripes">
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<div class="w-full h-[1px] bg-primary rotate-45 absolute"></div>
+<div class="w-full h-[1px] bg-primary -rotate-45 absolute"></div>
+</div>
+<span class="font-label-sm text-primary/40 uppercase">[ PROJECT_THUMBNAIL_01 ]</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">NEURAL_DASHBOARD</h3>
+<div class="border-t border-dotted border-primary/40 pt-2">
+<p class="text-on-surface-variant font-body-md">[ High-performance analytical interface designed for sub-millisecond data visualization and neural link telemetry processing. ]</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex justify-end">
+<a class="font-label-sm text-primary uppercase hover:bg-primary-container hover:text-on-primary-container px-4 py-2 border border-primary transition-all group-hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]" href="#">
+                        &gt; VIEW DETAILS →
+                    </a>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="group relative bg-terminal-dim border border-primary/30 hover:border-primary-container transition-all duration-300 p-4 flex flex-col gap-4">
+<div class="aspect-video w-full border border-primary/20 relative overflow-hidden bg-surface-container-lowest flex items-center justify-center diagonal-stripes">
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<div class="w-full h-[1px] bg-primary rotate-45 absolute"></div>
+<div class="w-full h-[1px] bg-primary -rotate-45 absolute"></div>
+</div>
+<span class="font-label-sm text-primary/40 uppercase">[ PROJECT_THUMBNAIL_02 ]</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">CYBER_PROTOCOL</h3>
+<div class="border-t border-dotted border-primary/40 pt-2">
+<p class="text-on-surface-variant font-body-md">[ Deciphering legacy systems through automated brute-force semantic mapping and cryptographic re-alignment scripts. ]</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex justify-end">
+<a class="font-label-sm text-primary uppercase hover:bg-primary-container hover:text-on-primary-container px-4 py-2 border border-primary transition-all group-hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]" href="#">
+                        &gt; VIEW DETAILS →
+                    </a>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="group relative bg-terminal-dim border border-primary/30 hover:border-primary-container transition-all duration-300 p-4 flex flex-col gap-4">
+<div class="aspect-video w-full border border-primary/20 relative overflow-hidden bg-surface-container-lowest flex items-center justify-center diagonal-stripes">
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<div class="w-full h-[1px] bg-primary rotate-45 absolute"></div>
+<div class="w-full h-[1px] bg-primary -rotate-45 absolute"></div>
+</div>
+<span class="font-label-sm text-primary/40 uppercase">[ PROJECT_THUMBNAIL_03 ]</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">VOID_INTEROP</h3>
+<div class="border-t border-dotted border-primary/40 pt-2">
+<p class="text-on-surface-variant font-body-md">[ An experimental bridge between distributed ledgers and localized edge computing nodes in low-connectivity zones. ]</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex justify-end">
+<a class="font-label-sm text-primary uppercase hover:bg-primary-container hover:text-on-primary-container px-4 py-2 border border-primary transition-all group-hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]" href="#">
+                        &gt; VIEW DETAILS →
+                    </a>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="group relative bg-terminal-dim border border-primary/30 hover:border-primary-container transition-all duration-300 p-4 flex flex-col gap-4">
+<div class="aspect-video w-full border border-primary/20 relative overflow-hidden bg-surface-container-lowest flex items-center justify-center diagonal-stripes">
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<div class="w-full h-[1px] bg-primary rotate-45 absolute"></div>
+<div class="w-full h-[1px] bg-primary -rotate-45 absolute"></div>
+</div>
+<span class="font-label-sm text-primary/40 uppercase">[ PROJECT_THUMBNAIL_04 ]</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">GHOST_SHELL</h3>
+<div class="border-t border-dotted border-primary/40 pt-2">
+<p class="text-on-surface-variant font-body-md">[ Stealth-optimized terminal emulator with built-in obfuscation and variable-frequency command transmission. ]</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex justify-end">
+<a class="font-label-sm text-primary uppercase hover:bg-primary-container hover:text-on-primary-container px-4 py-2 border border-primary transition-all group-hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]" href="#">
+                        &gt; VIEW DETAILS →
+                    </a>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="group relative bg-terminal-dim border border-primary/30 hover:border-primary-container transition-all duration-300 p-4 flex flex-col gap-4">
+<div class="aspect-video w-full border border-primary/20 relative overflow-hidden bg-surface-container-lowest flex items-center justify-center diagonal-stripes">
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<div class="w-full h-[1px] bg-primary rotate-45 absolute"></div>
+<div class="w-full h-[1px] bg-primary -rotate-45 absolute"></div>
+</div>
+<span class="font-label-sm text-primary/40 uppercase">[ PROJECT_THUMBNAIL_05 ]</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">BRUTAL_CORE</h3>
+<div class="border-t border-dotted border-primary/40 pt-2">
+<p class="text-on-surface-variant font-body-md">[ Core component library utilizing strict 8px grids and pure CSS geometry for lightweight, hardware-accelerated UI. ]</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex justify-end">
+<a class="font-label-sm text-primary uppercase hover:bg-primary-container hover:text-on-primary-container px-4 py-2 border border-primary transition-all group-hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]" href="#">
+                        &gt; VIEW DETAILS →
+                    </a>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="group relative bg-terminal-dim border border-primary/30 hover:border-primary-container transition-all duration-300 p-4 flex flex-col gap-4">
+<div class="aspect-video w-full border border-primary/20 relative overflow-hidden bg-surface-container-lowest flex items-center justify-center diagonal-stripes">
+<div class="absolute inset-0 flex items-center justify-center opacity-20">
+<div class="w-full h-[1px] bg-primary rotate-45 absolute"></div>
+<div class="w-full h-[1px] bg-primary -rotate-45 absolute"></div>
+</div>
+<span class="font-label-sm text-primary/40 uppercase">[ PROJECT_THUMBNAIL_06 ]</span>
+</div>
+<div class="space-y-2">
+<h3 class="font-headline-md text-headline-md text-primary tracking-tight">SYNTAX_ERROR</h3>
+<div class="border-t border-dotted border-primary/40 pt-2">
+<p class="text-on-surface-variant font-body-md">[ Curated collection of artistic glitch-renderings generated by intentionally overloading browser memory buffers. ]</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex justify-end">
+<a class="font-label-sm text-primary uppercase hover:bg-primary-container hover:text-on-primary-container px-4 py-2 border border-primary transition-all group-hover:shadow-[0_0_15px_rgba(0,255,136,0.3)]" href="#">
+                        &gt; VIEW DETAILS →
+                    </a>
+</div>
+</article>
+</div>
+<!-- Terminal Output Decoy -->
+<section class="mt-margin-desktop border border-primary/20 p-6 bg-surface-container-lowest font-body-md text-primary/60">
+<div class="flex items-center justify-between mb-4 border-b border-primary/20 pb-2">
+<span class="font-label-sm">CON_LOG_SNAPSHOT</span>
+<span class="font-label-sm">TTY: pts/0</span>
+</div>
+<div class="space-y-1 opacity-80">
+<p>&gt; Loading local cache assets...</p>
+<p>&gt; Initializing project_grid_v2.sys</p>
+<p>&gt; Fetching repository metadata from remote/origin/main</p>
+<p>&gt; Found 42 commits. Last stable build 04:20:00 AM</p>
+<div class="flex gap-2">
+<span>&gt; _</span>
+<span class="animate-[ping_1s_infinite] bg-primary w-2 h-5"></span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-primary dark:border-primary-fixed mt-auto bg-background dark:bg-background flex flex-col md:flex-row justify-between items-center px-margin-desktop py-gutter w-full">
+<div class="font-headline-md text-headline-md text-primary mb-4 md:mb-0">R</div>
+<div class="font-label-sm text-label-sm uppercase text-on-surface-variant text-center md:text-left">
+            © 2024 RIA_SYSTEMS. ALL_RIGHTS_RESERVED.
+        </div>
+<div class="flex gap-gutter mt-4 md:mt-0">
+<a class="font-label-sm text-label-sm uppercase text-on-surface-variant hover:text-primary-container transition-all hover:translate-x-1 duration-150" href="#">Documentation</a>
+<a class="font-label-sm text-label-sm uppercase text-on-surface-variant hover:text-primary-container transition-all hover:translate-x-1 duration-150" href="#">Source</a>
+<a class="font-label-sm text-label-sm uppercase text-primary underline hover:text-primary-container transition-all hover:translate-x-1 duration-150" href="#">Terminal</a>
+</div>
+</footer>
+<script>
+        // Simple micro-interaction for magnetic buttons or hover effects
+        document.querySelectorAll('article').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,85 @@
+.click-ripple-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.click-ripple {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+}
+
+.click-ripple-ring,
+.click-ripple-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.click-ripple-ring--primary {
+  width: 12px;
+  height: 12px;
+  border: 1px solid var(--cyber-neon);
+  box-shadow:
+    0 0 8px var(--cyber-neon-glow),
+    0 0 20px rgba(0, 255, 136, 0.35);
+  animation: cyber-ripple-expand 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.click-ripple-ring--secondary {
+  width: 8px;
+  height: 8px;
+  border: 1px solid var(--cyber-magenta);
+  box-shadow:
+    0 0 8px var(--cyber-magenta-glow),
+    0 0 16px rgba(255, 0, 255, 0.25);
+  animation: cyber-ripple-expand-alt 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.05s forwards;
+}
+
+.click-ripple-core {
+  width: 4px;
+  height: 4px;
+  background: var(--cyber-cyan);
+  box-shadow: 0 0 12px var(--cyber-cyan-glow);
+  animation: cyber-ripple-core 0.5s ease-out forwards;
+}
+
+@keyframes cyber-ripple-expand {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(14);
+  }
+}
+
+@keyframes cyber-ripple-expand-alt {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(10);
+  }
+}
+
+@keyframes cyber-ripple-core {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+}

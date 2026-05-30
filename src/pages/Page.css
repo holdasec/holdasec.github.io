@@ -1,0 +1,17 @@
+.page-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 120px var(--spacing-margin-mobile) var(--spacing-margin-desktop);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .page-content {
+    padding-left: var(--spacing-margin-desktop);
+    padding-right: var(--spacing-margin-desktop);
+  }
+}
+
+.works-page-content {
+  max-width: var(--max-width);
+}
