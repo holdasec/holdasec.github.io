@@ -1,10 +1,9 @@
 # GitHub Pages 部署说明
 
 仓库：`git@github.com:holdasec/holeasec.github.io.git`  
-访问地址：**https://holdasec.github.io/holeasec.github.io/**
+访问地址：**https://holdasec.github.io/**
 
-> 你的 GitHub 账号是 `holdasec`，仓库名是 `holeasec.github.io`（拼写不同），因此**不能**用 `https://holdasec.github.io/` 根域名。  
-> 若要用根域名，请在 GitHub 把仓库改名为 **`holdasec.github.io`**，并把 `vite.config.js` 里 `base` 改回 `'/'`。
+> 仓库须命名为 **`holdasec.github.io`**（与 GitHub 用户名一致），`vite.config.js` 中 `base` 必须为 `'/'`。
 
 ## 在 GitHub 上开启 Pages（首次）
 
