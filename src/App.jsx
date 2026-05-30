@@ -10,9 +10,13 @@ import AboutPage from './pages/About/AboutPage';
 import WorksPage from './pages/Works/WorksPage';
 import ContactPage from './pages/Contact/ContactPage';
 
+// BASE_URL 为 '/' 时不能传给 BrowserRouter，否则路由匹配失败、页面空白
+const routerBasename =
+  import.meta.env.BASE_URL === '/' ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '');
+
 function App() {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <BrowserRouter basename={routerBasename}>
       <div className="app terminal-grid-bg">
         <Scanline />
         <ClickRipple />
